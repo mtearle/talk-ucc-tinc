@@ -1,0 +1,5 @@
+Address = 192.0.2.16 661
+
+-----BEGIN RSA PUBLIC KEY-----
+# DELETED - use tincd -n sdinet -K 4096 to generate on host
+-----END RSA PUBLIC KEY-----
