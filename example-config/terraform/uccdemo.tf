@@ -9,7 +9,7 @@
 
 resource "aws_key_pair" "terraform_ec2_key" {
   key_name = "terraform_ec2_key"
-  public_key = file("username.pub")
+  public_key = file("~/.ssh/id_rsa.pub")
 }
 
 resource "aws_security_group" "tincdemo_sg" {
@@ -49,41 +49,41 @@ provider "aws" {
 resource "aws_instance" "berkeley" {
   ami           = "ami-2757f631"
   instance_type = "t2.micro"
-  key_name = "terraform_ec2_key"
+  key_name = aws_key_pair.terraform_ec2_key.key_name
   security_groups = ["${aws_security_group.tincdemo_sg.name}"]
 }
 
 resource "aws_instance" "tymnet" {
   ami           = "ami-2757f631"
   instance_type = "t2.micro"
-  key_name = "terraform_ec2_key"
+  key_name = aws_key_pair.terraform_ec2_key.key_name
   security_groups = ["${aws_security_group.tincdemo_sg.name}"]
 }
 
 resource "aws_instance" "mitre" {
   ami           = "ami-2757f631"
   instance_type = "t2.micro"
-  key_name = "terraform_ec2_key"
+  key_name = aws_key_pair.terraform_ec2_key.key_name
   security_groups = ["${aws_security_group.tincdemo_sg.name}"]
 }
 
 resource "aws_instance" "bremen" {
   ami           = "ami-2757f631"
   instance_type = "t2.micro"
-  key_name = "terraform_ec2_key"
+  key_name = aws_key_pair.terraform_ec2_key.key_name
   security_groups = ["${aws_security_group.tincdemo_sg.name}"]
 }
 
 resource "aws_instance" "hannover" {
   ami           = "ami-2757f631"
   instance_type = "t2.micro"
-  key_name = "terraform_ec2_key"
+  key_name = aws_key_pair.terraform_ec2_key.key_name
   security_groups = ["${aws_security_group.tincdemo_sg.name}"]
 }
 
 resource "aws_instance" "kremvax" {
   ami           = "ami-2757f631"
   instance_type = "t2.micro"
-  key_name = "terraform_ec2_key"
+  key_name = aws_key_pair.terraform_ec2_key.key_name
   security_groups = ["${aws_security_group.tincdemo_sg.name}"]
 }
