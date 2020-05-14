@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+HOST=$1
+
+IP=$(grep ^$HOST tincdemo.inventory | cut -d= -f3)
+
+ssh root@$IP

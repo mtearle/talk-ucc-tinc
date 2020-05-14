@@ -9,5 +9,7 @@ terraform state pull
 #terraform state pull | jq '.resources[] | .name + " " + .instances[0].attributes.ipv4_address'
 (echo "[tincdemo]";terraform state pull | jq '.resources[] | .name + " " + .instances[0].attributes.ipv4_address' | sed 's/"//g' | sed 's/ / ansible_user=root ansible_host=/') > tincdemo.inventory
 cat tincdemo.inventory
+sleep 20
+mkdir -p files/hostkeys
 export ANSIBLE_HOST_KEY_CHECKING=false
 ansible-playbook -i tincdemo.inventory uccdemo.yml

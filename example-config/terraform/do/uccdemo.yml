@@ -20,3 +20,34 @@
       apt:
           name: inetutils-traceroute
           state: present
+
+    - name: Make directory for VPN hosts
+      file:
+          name: /etc/tinc/sdinet/hosts
+          state: directory
+
+    - name: Make VPN host file
+      file:
+          name: "/etc/tinc/sdinet/hosts/{{ inventory_hostname }}"
+          state: touch
+
+    - name: Template tinc.conf
+      template:
+          src: tinc.conf.j2
+          dest: /etc/tinc/sdinet/tinc.conf
+
+    - name: Generate tinc keys
+      command:
+          cmd: tincd -n sdinet -K 4096
+   
+    - name: Grab keys from hosts
+      fetch:
+          src: "/etc/tinc/sdinet/hosts/{{ inventory_hostname }}"
+          dest: "files/hostkeys/{{ inventory_hostname }}"
+          flat: yes
+
+    - name: Push keys to hosts 
+      copy:
+          src: "files/hostkeys/{{ item }}"
+          dest: "/etc/tinc/sdinet/hosts/{{ item }}"
+      loop: "{{ ansible_play_batch }}"
