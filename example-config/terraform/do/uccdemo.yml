@@ -36,6 +36,11 @@
           src: tinc.conf.j2
           dest: /etc/tinc/sdinet/tinc.conf
 
+    - name: Nuke old tinc keys
+      file:
+          name: /etc/tinc/sdinet/rsa_key.priv
+          state: absent
+
     - name: Generate tinc keys
       command:
           cmd: tincd -n sdinet -K 4096
@@ -46,6 +51,11 @@
           line: "Address = {{ ansible_host }}"
           path: "/etc/tinc/sdinet/hosts/{{ inventory_hostname }}"
 
+    - name: Add IPv4 subnet to host file for host
+      lineinfile:
+          insertbefore: BOF
+          line: "Subnet = {{ cidr }}"
+          path: "/etc/tinc/sdinet/hosts/{{ inventory_hostname }}"
    
     - name: Grab keys from hosts
       fetch:
@@ -81,12 +91,6 @@
           dest: /etc/tinc/sdinet/tinc-down
           mode: '0755'
 
-    - name: Add IPv4 subnet to host file for host
-      lineinfile:
-          insertbefore: BOF
-          line: "Subnet = {{ subnet }}"
-          path: "/etc/tinc/sdinet/hosts/{{ inventory_hostname }}"
-
     - name: Add IPv6 subnet to host file for host
       lineinfile:
           insertbefore: BOF
@@ -94,3 +98,24 @@
           path: "/etc/tinc/sdinet/hosts/{{ inventory_hostname }}"
       when: ipv6subnet is defined
 
+    - name: Add hosts to /etc/hosts
+      blockinfile: 
+          block: "{{ lookup('file', 'files/etc-hosts') }}"
+          dest: /etc/hosts
+
+    - name: Add sdinet to nets.boot
+      copy:
+          src: nets.boot
+          dest: /etc/tinc/nets.boot
+
+    - name: Enable tinc to start at boot
+      systemd:
+          name: tinc
+          enabled: yes
+          state: started
+
+    - name: Enable tinc to start at boot
+      systemd:
+          name: tinc@sdinet
+          enabled: yes
+          state: started

@@ -8,7 +8,7 @@
 # kremvax 172.16.99.0/24 172.16.99.1 eu-north-1
 
 resource "digitalocean_droplet" "berkeley" {
-  image = "ubuntu-18-04-x64"
+  image = "debian-10-x64"
   name	= "berkeley"
   region = "sgp1"
   size = "s-1vcpu-1gb"
@@ -19,7 +19,7 @@ resource "digitalocean_droplet" "berkeley" {
 }
 
 resource "digitalocean_droplet" "tymnet" {
-  image = "ubuntu-18-04-x64"
+  image = "debian-10-x64"
   name	= "tymnet"
   region = "sfo2"
   size = "s-1vcpu-1gb"
@@ -30,7 +30,7 @@ resource "digitalocean_droplet" "tymnet" {
 }
 
 resource "digitalocean_droplet" "mitre" {
-  image = "ubuntu-18-04-x64"
+  image = "debian-10-x64"
   name	= "mitre"
   region = "nyc1"
   size = "s-1vcpu-1gb"
@@ -41,7 +41,7 @@ resource "digitalocean_droplet" "mitre" {
 }
 
 resource "digitalocean_droplet" "bremen" {
-  image = "ubuntu-18-04-x64"
+  image = "debian-10-x64"
   name	= "bremen"
   region = "ams3"
   size = "s-1vcpu-1gb"
@@ -52,7 +52,7 @@ resource "digitalocean_droplet" "bremen" {
 }
 
 resource "digitalocean_droplet" "hannover" {
-  image = "ubuntu-18-04-x64"
+  image = "debian-10-x64"
   name	= "hannover"
   region = "fra1"
   size = "s-1vcpu-1gb"
@@ -63,7 +63,7 @@ resource "digitalocean_droplet" "hannover" {
 }
 
 resource "digitalocean_droplet" "kremvax" {
-  image = "ubuntu-18-04-x64"
+  image = "debian-10-x64"
   name	= "kgb"
   region = "tor1"
   size = "s-1vcpu-1gb"

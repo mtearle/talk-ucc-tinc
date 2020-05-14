@@ -1,13 +1,13 @@
-# talk-netmcr-tinc
+# talk-ucc-tinc
 
-A talk on tinc for NetMcr <https://netmcr.uk/>
+A talk on tinc for UCC <https://www.ucc.asn.au/>
 
-Presented Thu 13 Apr 2017
+Presented Thursday, 14th May 2020, for the Charity unVigil
 
 ## Speaker
 
 Mark Tearle 
-mark@tearle.com
+mtearle@ucc.asn.au
 
 ## See also
 
