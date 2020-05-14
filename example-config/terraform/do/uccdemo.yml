@@ -1,0 +1,22 @@
+---
+- hosts: tincdemo
+  tasks: 
+    - name: update and upgrade
+      apt:
+          update_cache: yes
+          upgrade: yes
+
+    - name: Install tinc
+      apt:
+          name: tinc
+          state: present
+
+    - name: Install mtr
+      apt:
+          name: mtr
+          state: present
+
+    - name: Install inetutils-traceroute
+      apt:
+          name: inetutils-traceroute
+          state: present

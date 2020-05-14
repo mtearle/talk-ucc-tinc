@@ -1,0 +1,5 @@
+#!/bin/bash
+
+ip link set $INTERFACE up
+ip addr add {{ hostcidr }} dev $INTERFACE
+ip route add {{ subnet }} dev $INTERFACE

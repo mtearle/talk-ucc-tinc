@@ -1,0 +1,12 @@
+berkeley_ip: 172.16.86.10
+berkeley_ipv6: fde3:b35d:dadf::1/128
+berkeley_cidr: 172.16.86.10/32
+tymnet_ip: 172.16.86.20
+tymnet_cidr: 172.16.86.20/32
+mitre_ip: 172.16.86.30
+mitre_cidr: 172.16.86.30/32
+bremen_ip: 172.16.86.40
+bremen_cidr: 172.16.86.40/32
+hannover_ip: 172.16.86.50
+hannover_cidr: 172.16.86.50/32
+hannover_ipv6: fde3:b35d:dadf::2/128
