@@ -39,6 +39,13 @@
     - name: Generate tinc keys
       command:
           cmd: tincd -n sdinet -K 4096
+
+    - name: Add address to hosts file
+      lineinfile:
+          insertbefore: BOF
+          line: "Address = {{ ansible_host }}"
+          path: "/etc/tinc/sdinet/hosts/{{ inventory_hostname }}"
+
    
     - name: Grab keys from hosts
       fetch:
@@ -51,3 +58,39 @@
           src: "files/hostkeys/{{ item }}"
           dest: "/etc/tinc/sdinet/hosts/{{ item }}"
       loop: "{{ ansible_play_batch }}"
+
+    - name: Push topology to hosts
+      vars:
+          topology_file: "files/topology/{{ inventory_hostname}}"
+      blockinfile:
+          marker_begin: "BEGIN topology"
+          marker_end: "END topology"
+          insertafter: "^# CONNECT"
+          block: "{{ lookup( 'file', topology_file ) }}"
+          dest: /etc/tinc/sdinet/tinc.conf
+    
+    - name: Template tinc-up
+      template:
+          src: tinc-up.j2
+          dest: /etc/tinc/sdinet/tinc-up
+          mode: '0755'
+
+    - name: Template tinc-up
+      template:
+          src: tinc-down.j2
+          dest: /etc/tinc/sdinet/tinc-down
+          mode: '0755'
+
+    - name: Add IPv4 subnet to host file for host
+      lineinfile:
+          insertbefore: BOF
+          line: "Subnet = {{ subnet }}"
+          path: "/etc/tinc/sdinet/hosts/{{ inventory_hostname }}"
+
+    - name: Add IPv6 subnet to host file for host
+      lineinfile:
+          insertbefore: BOF
+          line: "Subnet = {{ ipv6subnet }}"
+          path: "/etc/tinc/sdinet/hosts/{{ inventory_hostname }}"
+      when: ipv6subnet is defined
+

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+ip link set $INTERFACE up
+ip addr add {{ cidr }} dev $INTERFACE
+{% if ipv6 is defined %}
+ip addr add {{ ipv6 }} dev $INTERFACE
+ip route add {{ ipv6subnet }} dev $INTERFACE
+{% endif %}
+ip route add {{ subnet }} dev $INTERFACE

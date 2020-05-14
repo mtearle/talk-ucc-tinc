@@ -1,0 +1,5 @@
+ip: 172.16.86.50
+subnet: 172.16.86.0/24
+cidr: 172.16.86.50/32
+ipv6: fde3:b35d:dadf::2/128
+ipv6subnet: fde3:b35d:dadf::/64

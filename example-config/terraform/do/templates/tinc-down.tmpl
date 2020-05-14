@@ -1,5 +1,0 @@
-#!/bin/bash
-
-ip route del {{ subnet }} dev $INTERFACE
-ip addr del {{ hostcidr }} dev $INTERFACE
-ip link set $INTERFACE down
